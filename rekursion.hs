@@ -14,12 +14,12 @@ capital d i t
 -- d: amount of regular deposits
 -- i: interest rate (percentage)
 -- t: duration
-capital :: Fractional a => a -> a -> Natural -> a
-capital d i t
+capital' :: Fractional a => a -> a -> Natural -> a
+capital' d i t
   | t == 0 = 0
   | otherwise = previousCapital + d + yield
   where
-    previousCapital = capital d i (t - 1)
+    previousCapital = capital' d i (t - 1)
     yield = (previousCapital + d) * (i / 100)
 
 
@@ -60,10 +60,10 @@ egcd a b
 
 -- Lösung:
 -- compute gcd (Euclidian algorithm - greatest common divisor)
-egcd :: Integral a => a -> a -> a
-egcd p q
+egcd' :: Integral a => a -> a -> a
+egcd' p q
   | remainder == 0 = n
-  | otherwise = egcd n remainder
+  | otherwise = egcd' n remainder
   where
     m = max (abs p) (abs q)
     n = min (abs p) (abs q)
